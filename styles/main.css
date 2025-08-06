@@ -29,12 +29,51 @@
   }
   
   .tool-card {
-    @apply transform hover:scale-105 hover:shadow-lg hover:shadow-neon-cyan/10 transition-all duration-300;
+    @apply transform hover:scale-105 hover:shadow-lg transition-all duration-300;
+    border: 1px solid rgba(0, 255, 209, 0.2);
+    box-shadow: 
+      0 0 10px rgba(0, 255, 209, 0.05),
+      inset 0 0 10px rgba(0, 255, 209, 0.02);
   }
   
+  .tool-card:hover {
+    border-color: rgba(0, 255, 209, 0.4);
+    box-shadow: 
+      0 0 20px rgba(0, 255, 209, 0.1),
+      inset 0 0 15px rgba(0, 255, 209, 0.05);
+  }
+
   .gpu-card-3d {
-    @apply bg-gradient-to-br from-gray-700 to-gray-800 rounded border border-gray-600;
-    background-image: linear-gradient(45deg, rgba(0, 255, 209, 0.1) 0%, rgba(255, 77, 151, 0.1) 100%);
+    @apply bg-gradient-to-br from-gray-900/80 to-gray-800/80 rounded border border-neon-cyan/30;
+    background-image: linear-gradient(45deg, rgba(0, 255, 209, 0.05) 0%, rgba(255, 77, 151, 0.05) 100%);
+    box-shadow: 
+      0 0 20px rgba(0, 255, 209, 0.1),
+      inset 0 0 20px rgba(0, 255, 209, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gpu-card-3d::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 209, 0.02), transparent);
+    animation: wireframe-pulse 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .trusted-partner {
+    border: 1px solid rgba(255, 77, 151, 0.2);
+    box-shadow: 
+      0 0 10px rgba(255, 77, 151, 0.05),
+      inset 0 0 10px rgba(255, 77, 151, 0.02);
+  }
+  
+  .trusted-partner:hover {
+    border-color: rgba(255, 77, 151, 0.4);
+    box-shadow: 
+      0 0 20px rgba(255, 77, 151, 0.1),
+      inset 0 0 15px rgba(255, 77, 151, 0.05);
   }
 
   /* Mobile menu animations */
@@ -102,6 +141,12 @@
   .backdrop-blur-strong {
     backdrop-filter: blur(20px);
   }
+}
+
+/* Wireframe animation */
+@keyframes wireframe-pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
 }
 
 /* Reduce motion for accessibility */

@@ -83,13 +83,14 @@ class SaimonApp {
         // Create GPU geometry (simplified representation)
         const gpuGeometry = new THREE.BoxGeometry(4, 0.8, 6);
         
-        // Create materials with neon glow effect
+        // Create wireframe material with neon glow effect
         const gpuMaterial = new THREE.MeshStandardMaterial({
-            color: 0x2d3748,
-            metalness: 0.8,
-            roughness: 0.2,
+            color: 0x00ffd1,
+            wireframe: true,
             emissive: 0x00ffd1,
-            emissiveIntensity: 0.1
+            emissiveIntensity: 0.3,
+            transparent: true,
+            opacity: 0.8
         });
 
         // Create GPU mesh
@@ -99,9 +100,12 @@ class SaimonApp {
         // Add cooling fans (simple cylinders)
         const fanGeometry = new THREE.CylinderGeometry(0.6, 0.6, 0.1, 8);
         const fanMaterial = new THREE.MeshStandardMaterial({
-            color: 0x1a202c,
-            metalness: 0.6,
-            roughness: 0.4
+            color: 0x00ffd1,
+            wireframe: true,
+            emissive: 0x00ffd1,
+            emissiveIntensity: 0.2,
+            transparent: true,
+            opacity: 0.7
         });
 
         const fan1 = new THREE.Mesh(fanGeometry, fanMaterial);
@@ -227,23 +231,28 @@ class SaimonApp {
             // Create mini GPU card
             const geometry = new THREE.BoxGeometry(2, 0.4, 3);
             const material = new THREE.MeshStandardMaterial({
-                color: 0x2d3748,
-                metalness: 0.7,
-                roughness: 0.3,
-                emissive: 0x00ffd1,
-                emissiveIntensity: 0.05
+                color: 0xff4d97,
+                wireframe: true,
+                emissive: 0xff4d97,
+                emissiveIntensity: 0.4,
+                transparent: true,
+                opacity: 0.9
             });
             
             const gpu = new THREE.Mesh(geometry, material);
             scene.add(gpu);
             
-            // Add lighting
-            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            // Add lighting optimized for wireframes
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.8);
             scene.add(ambientLight);
             
-            const pointLight = new THREE.PointLight(0x00ffd1, 0.5, 50);
+            const pointLight = new THREE.PointLight(0xff4d97, 1.2, 50);
             pointLight.position.set(2, 2, 2);
             scene.add(pointLight);
+
+            const rimLight = new THREE.PointLight(0x00ffd1, 0.8, 30);
+            rimLight.position.set(-2, -1, 3);
+            scene.add(rimLight);
             
             camera.position.set(0, 1, 4);
             camera.lookAt(0, 0, 0);
@@ -535,11 +544,18 @@ class SaimonApp {
         if (this.heroGPU && !this.isReducedMotion) {
             this.heroGPU.rotation.y = Math.sin(time * 0.5) * 0.3;
             this.heroGPU.rotation.x = Math.sin(time * 0.3) * 0.1;
+            
+            // Pulse wireframe intensity
+            const pulseFactor = (Math.sin(time * 2) + 1) * 0.5;
+            this.heroGPU.material.emissiveIntensity = 0.3 + pulseFactor * 0.2;
         }
 
         if (this.heroFans && !this.isReducedMotion) {
-            this.heroFans.forEach(fan => {
+            this.heroFans.forEach((fan, index) => {
                 fan.rotation.z += 0.1;
+                // Pulse wireframe intensity for fans too
+                const pulseFactor = (Math.sin(time * 2 + index * 0.5) + 1) * 0.5;
+                fan.material.emissiveIntensity = 0.2 + pulseFactor * 0.15;
             });
         }
 
@@ -548,11 +564,15 @@ class SaimonApp {
         this.animateParticles(this.aboutParticles, time);
 
         // Animate cluster cards
-        Object.keys(this.scenes).forEach(key => {
+        Object.keys(this.scenes).forEach((key, index) => {
             if (key.startsWith('cluster-')) {
                 const sceneData = this.scenes[key];
                 if (sceneData.gpu && !this.isReducedMotion) {
                     sceneData.gpu.rotation.y += 0.01;
+                    
+                    // Add pulsing wireframe effect
+                    const pulseFactor = (Math.sin(time * 1.5 + index * 0.7) + 1) * 0.5;
+                    sceneData.gpu.material.emissiveIntensity = 0.4 + pulseFactor * 0.3;
                 }
                 sceneData.renderer.render(sceneData.scene, sceneData.camera);
             }
