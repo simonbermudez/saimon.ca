@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://saimon.ca/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Disallow crawling of development files
+Disallow: /src/
+Disallow: /_vite/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+Disallow: /.env*
+Disallow: /package*.json
+Disallow: /vite.config.js
+Disallow: /tailwind.config.cjs
+Disallow: /postcss.config.cjs
+Disallow: /Dockerfile
+Disallow: /docker-compose.yml
+
+# Allow important files
+Allow: /styles/
+Allow: /public/
+Allow: /favicon.ico
+Allow: /robots.txt
+Allow: /sitemap.xml

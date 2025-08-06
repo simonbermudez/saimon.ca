@@ -3,79 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>saimon - AI/ML Labs</title>
-    <meta name="description" content="Showcasing cutting-edge AI/ML experiments powered by NVIDIA Tesla P40 GPU cluster and open-source technologies">
-    <link rel="stylesheet" href="./styles/main.css">
+    
+    <!-- Primary Meta Tags -->
+    <title>saimon - AI/ML Labs | GPU Cluster & Open Source AI Research</title>
+    <meta name="title" content="saimon - AI/ML Labs | GPU Cluster & Open Source AI Research">
+    <meta name="description" content="Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.">
+    <meta name="keywords" content="AI, machine learning, GPU cluster, Tesla P40, open source AI, neural networks, deep learning, LLM, artificial intelligence, research lab, NVIDIA, homelab">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="Simon Bermudez">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://saimon.ca">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://saimon.ca">
+    <meta property="og:title" content="saimon - AI/ML Labs | GPU Cluster & Open Source AI Research">
+    <meta property="og:description" content="Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.">
+    <meta property="og:image" content="https://saimon.ca/og-image.jpg">
+    <meta property="og:site_name" content="saimon - AI/ML Labs">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://saimon.ca">
+    <meta property="twitter:title" content="saimon - AI/ML Labs | GPU Cluster & Open Source AI Research">
+    <meta property="twitter:description" content="Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.">
+    <meta property="twitter:image" content="https://saimon.ca/og-image.jpg">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://chat.saimon.ca">
+    
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="dns-prefetch" href="//simonbermudez.com">
+    <link rel="dns-prefetch" href="//sonity.info">
+    
+    <!-- Fonts with display=swap for better performance -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./styles/main.css">
+    
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "saimon - AI/ML Labs",
+        "alternateName": "saimon",
+        "url": "https://saimon.ca",
+        "logo": "https://saimon.ca/logo.png",
+        "description": "Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.",
+        "foundingDate": "2025",
+        "founder": {
+            "@type": "Person",
+            "name": "Simon Bermudez"
+        },
+        "parentOrganization": {
+            "@type": "Organization",
+            "name": "Simon Bermudez Enterprises Inc.",
+            "url": "https://simonbermudez.com"
+        },
+        "sameAs": [
+            "https://chat.saimon.ca"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "technical support",
+            "url": "https://saimon.ca/#contact"
+        }
+    }
+    </script>
+    
+    <!-- Structured Data - Website -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "saimon - AI/ML Labs",
+        "url": "https://saimon.ca",
+        "description": "Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster",
+        "publisher": {
+            "@type": "Organization",
+            "name": "saimon - AI/ML Labs"
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://chat.saimon.ca/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Structured Data - TechArticle for Tools -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Open-Source AI/ML Toolbox - GPU Cluster Implementation",
+        "description": "Comprehensive guide to open-source AI/ML tools running on Tesla P40 GPU cluster",
+        "author": {
+            "@type": "Organization",
+            "name": "saimon - AI/ML Labs"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "saimon - AI/ML Labs",
+            "logo": "https://saimon.ca/logo.png"
+        },
+        "datePublished": "2025-08-06",
+        "dateModified": "2025-08-06",
+        "mainEntityOfPage": "https://saimon.ca/#tools",
+        "about": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "Open Web UI",
+                "applicationCategory": "AI Interface"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "Whisper",
+                "applicationCategory": "Speech Recognition"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "LangChain",
+                "applicationCategory": "AI Framework"
+            }
+        ]
+    }
+    </script>
 </head>
 <body class="dark bg-dark-bg text-dark-text font-mono antialiased overflow-x-hidden">
     <!-- Loading Screen -->
-    <div id="loading-screen" class="fixed inset-0 z-50 bg-dark-bg flex items-center justify-center">
+    <div id="loading-screen" class="fixed inset-0 z-50 bg-dark-bg flex items-center justify-center" role="dialog" aria-label="Loading application" aria-live="polite">
         <div class="text-center">
-            <div class="animate-spin w-8 h-8 border-2 border-neon-cyan border-t-transparent rounded-full mx-auto mb-4"></div>
+            <div class="animate-spin w-8 h-8 border-2 border-neon-cyan border-t-transparent rounded-full mx-auto mb-4" role="status" aria-hidden="true"></div>
             <p class="text-neon-cyan">Initializing GPU cluster...</p>
         </div>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-40 bg-dark-bg/80 backdrop-blur-md border-b border-gray-700">
+    <nav class="fixed top-0 left-0 right-0 z-40 bg-dark-bg/80 backdrop-blur-md border-b border-gray-700" role="navigation" aria-label="Main navigation">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-neon-cyan animate-glow">saimon</h1>
+                <h1 class="text-2xl font-bold text-neon-cyan animate-glow">
+                    <a href="#hero" aria-label="saimon - AI/ML Labs Home">saimon</a>
+                </h1>
                 <div class="flex space-x-6 items-center">
                     <a href="#hero" class="nav-link transition-colors hover:text-neon-cyan" aria-label="Home">Home</a>
-                    <a href="#about" class="nav-link transition-colors hover:text-neon-cyan" aria-label="About">Lab</a>
+                    <a href="#about" class="nav-link transition-colors hover:text-neon-cyan" aria-label="About the Lab">Lab</a>
+                    <a href="#trusted-by" class="nav-link transition-colors hover:text-neon-cyan" aria-label="Trusted Partners">Partners</a>
                     <a href="#cluster" class="nav-link transition-colors hover:text-neon-cyan" aria-label="GPU Cluster">Cluster</a>
-                    <a href="#tools" class="nav-link transition-colors hover:text-neon-cyan" aria-label="Tools">Tools</a>
+                    <a href="#tools" class="nav-link transition-colors hover:text-neon-cyan" aria-label="Open Source Tools">Tools</a>
                     <a href="#contact" class="nav-link transition-colors hover:text-neon-cyan" aria-label="Contact">Contact</a>
                     <a href="https://chat.saimon.ca" target="_blank" rel="noopener noreferrer" 
                        class="ml-4 py-2 px-4 bg-neon-cyan/20 border border-neon-cyan rounded-lg font-medium text-neon-cyan hover:bg-neon-cyan/30 transition-all duration-300 backdrop-blur-sm" 
-                       aria-label="Chat Now">Chat Now</a>
+                       aria-label="Chat with AI - Opens in new window">Chat With Me</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full"></canvas>
+    <header id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
         <div class="relative z-10 text-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-6 text-neon-cyan animate-glow">
                 saimon
             </h1>
             <p class="text-xl md:text-2xl mb-8 text-gray-300">
-                AI/ML Labs - Powered by Tesla P40 Cluster
+                AI/ML Labs - Powered by Tesla P40 GPU Cluster
             </p>
             <a href="https://chat.saimon.ca" target="_blank" rel="noopener noreferrer" 
-               class="inline-block mb-8 py-3 px-8 bg-neon-cyan/20 border border-neon-cyan rounded-lg font-medium text-neon-cyan hover:bg-neon-cyan/30 transition-all duration-300 backdrop-blur-sm text-lg">
-                Chat Now
+               class="inline-block mb-8 py-3 px-8 bg-neon-cyan/20 border border-neon-cyan rounded-lg font-medium text-neon-cyan hover:bg-neon-cyan/30 transition-all duration-300 backdrop-blur-sm text-lg"
+               aria-label="Start chatting with our AI - Opens in new window">
+                Chat With Me
             </a>
-            <div class="animate-bounce">
-                <svg class="w-6 h-6 mx-auto text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="animate-bounce" role="presentation" aria-hidden="true">
+                <svg class="w-6 h-6 mx-auto text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                 </svg>
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- About the Lab -->
     <section id="about" class="relative min-h-screen flex items-center py-20">
-        <canvas id="about-canvas" class="absolute inset-0 w-full h-full"></canvas>
+        <canvas id="about-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
         <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl mx-auto text-center">
+            <article class="max-w-4xl mx-auto text-center">
                 <h2 class="text-4xl md:text-5xl font-bold mb-12 text-neon-cyan">About the Lab</h2>
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div class="space-y-6 text-lg text-left">
                         <p class="leading-relaxed">
-                            Welcome to saimon, the AI/ML subsidiary of <a href="https://simonbermudez.com">Simon Bermudez Enterprises Inc.</a> 
-                            Our mission is to push the boundaries of artificial intelligence and machine learning 
+                            Welcome to <strong>saimon</strong>, the AI/ML subsidiary of <a href="https://simonbermudez.com" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:underline">Simon Bermudez Enterprises Inc.</a> 
+                            Our mission is to push the boundaries of <em>artificial intelligence</em> and <em>machine learning</em> 
                             through cutting-edge research and experimentation.
                         </p>
                         <p class="leading-relaxed">
-                            Powered by a robust cluster of NVIDIA Tesla P40 GPUs, we run self-hosted open-source 
-                            large language models and conduct advanced AI experiments. Our homelab serves as a 
+                            Powered by a robust cluster of <strong>NVIDIA Tesla P40 GPUs</strong>, we run self-hosted open-source 
+                            <abbr title="Large Language Models">large language models</abbr> and conduct advanced AI experiments. Our homelab serves as a 
                             playground for exploring the latest developments in neural networks, deep learning, 
                             and generative AI.
                         </p>
@@ -84,17 +222,71 @@
                             the field while maintaining full control over our infrastructure and data privacy.
                         </p>
                     </div>
-                    <div class="text-center">
+                    <aside class="text-center">
                         <div class="inline-block p-8 bg-gray-800/50 rounded-lg backdrop-blur-sm">
                             <h3 class="text-2xl font-bold text-neon-pink mb-4">Lab Specifications</h3>
-                            <ul class="space-y-2 text-left">
-                                <li class="flex justify-between"><span>GPU Cards:</span> <span class="text-neon-cyan">Tesla P40 x4</span></li>
-                                <li class="flex justify-between"><span>VRAM Total:</span> <span class="text-neon-cyan">96GB</span></li>
-                                <li class="flex justify-between"><span>CUDA Cores:</span> <span class="text-neon-cyan">15,360</span></li>
-                                <li class="flex justify-between"><span>Architecture:</span> <span class="text-neon-cyan">Pascal</span></li>
-                            </ul>
+                            <dl class="space-y-2 text-left">
+                                <div class="flex justify-between">
+                                    <dt>GPU Cards:</dt>
+                                    <dd class="text-neon-cyan font-semibold">Tesla P40 x4</dd>
+                                </div>
+                                <div class="flex justify-between">
+                                    <dt><abbr title="Video Random Access Memory">VRAM</abbr> Total:</dt>
+                                    <dd class="text-neon-cyan font-semibold">96GB</dd>
+                                </div>
+                                <div class="flex justify-between">
+                                    <dt><abbr title="Compute Unified Device Architecture">CUDA</abbr> Cores:</dt>
+                                    <dd class="text-neon-cyan font-semibold">15,360</dd>
+                                </div>
+                                <div class="flex justify-between">
+                                    <dt>Architecture:</dt>
+                                    <dd class="text-neon-cyan font-semibold">Pascal</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </aside>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section id="trusted-by" class="relative py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-12 text-neon-cyan">Trusted By</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    
+                    <!-- Sonity -->
+                    <div class="trusted-partner bg-gray-800/50 rounded-lg p-8 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-neon-pink/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <span class="text-neon-pink font-bold text-xl">S</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-neon-pink mb-3">Sonity</h3>
+                            <p class="text-gray-300 mb-4">Advanced audio processing and music technology solutions</p>
+                            <a href="https://sonity.info" target="_blank" rel="noopener noreferrer" 
+                               class="text-neon-cyan hover:underline">
+                                sonity.info →
+                            </a>
                         </div>
                     </div>
+
+                    <!-- Simon Bermudez Enterprises -->
+                    <div class="trusted-partner bg-gray-800/50 rounded-lg p-8 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-neon-cyan/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <span class="text-neon-cyan font-bold text-xl">SB</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-neon-cyan mb-3">Simon Bermudez Enterprises</h3>
+                            <p class="text-gray-300 mb-4">Technology consulting and software development services</p>
+                            <a href="https://simonbermudez.com" target="_blank" rel="noopener noreferrer" 
+                               class="text-neon-cyan hover:underline">
+                                simonbermudez.com →
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -389,11 +581,22 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800/50 backdrop-blur-sm py-12">
+    <footer class="bg-gray-800/50 backdrop-blur-sm py-12" role="contentinfo">
         <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-400 mb-4">
-                © 2025 saimon - AI/ML Labs, a subsidiary of <a href="https://simonbermudez.com">Simon Bermudez Enterprises Inc.</a>
-            </p>
+            <address class="not-italic">
+                <p class="text-gray-400 mb-4">
+                    © <time datetime="2025">2025</time> <strong>saimon - AI/ML Labs</strong>, a subsidiary of 
+                    <a href="https://simonbermudez.com" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:underline">Simon Bermudez Enterprises Inc.</a>
+                </p>
+            </address>
+            <nav aria-label="Footer navigation">
+                <ul class="flex justify-center space-x-6 text-sm text-gray-400">
+                    <li><a href="#about" class="hover:text-neon-cyan transition-colors">About</a></li>
+                    <li><a href="#tools" class="hover:text-neon-cyan transition-colors">Tools</a></li>
+                    <li><a href="#contact" class="hover:text-neon-cyan transition-colors">Contact</a></li>
+                    <li><a href="https://chat.saimon.ca" target="_blank" rel="noopener noreferrer" class="hover:text-neon-cyan transition-colors">Chat</a></li>
+                </ul>
+            </nav>
         </div>
     </footer>
 
