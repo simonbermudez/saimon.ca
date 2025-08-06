@@ -1,4 +1,4 @@
-# saimon.ca - AI/ML Labs
+# saimon - AI/ML Labs
 
 A visually stunning, fully dark-mode website showcasing Simon Bermudez Enterprises Inc.'s AI/ML Labs subsidiary, featuring a NVIDIA Tesla P40 GPU cluster and open-source AI/ML stack.
 
@@ -22,7 +22,7 @@ A visually stunning, fully dark-mode website showcasing Simon Bermudez Enterpris
 ## 🏗 Project Structure
 
 ```
-saimon.ca/
+saimon/
 ├── index.html              # Main HTML file
 ├── src/
 │   └── main.js             # Main JavaScript application
@@ -49,7 +49,7 @@ saimon.ca/
 1. **Clone and install dependencies:**
    ```bash
    git clone <repository-url>
-   cd saimon.ca
+   cd saimon
    npm install
    ```
 
@@ -163,7 +163,7 @@ Our Tesla P40 cluster features:
 
 ## 🤝 Contributing
 
-This is a showcase project for saimon.ca. For suggestions or improvements:
+This is a showcase project for saimon. For suggestions or improvements:
 
 1. Fork the repository
 2. Create a feature branch
@@ -176,7 +176,7 @@ MIT License - see LICENSE file for details
 
 ## 🏢 About
 
-**saimon.ca** is the AI/ML Labs subsidiary of **Simon Bermudez Enterprises Inc.**, dedicated to advancing artificial intelligence and machine learning through cutting-edge research and open-source technologies.
+**saimon** is the AI/ML Labs subsidiary of **Simon Bermudez Enterprises Inc.**, dedicated to advancing artificial intelligence and machine learning through cutting-edge research and open-source technologies.
 
 ---
 
