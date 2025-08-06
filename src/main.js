@@ -258,7 +258,91 @@ class SaimonApp {
 
     initializeNavigation() {
         const navLinks = document.querySelectorAll('.nav-link');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
         
+        // Mobile menu toggle functionality
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                
+                // Toggle menu visibility
+                mobileMenu.classList.toggle('hidden');
+                
+                // Update button state
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                
+                // Toggle icons
+                if (menuIcon && closeIcon) {
+                    menuIcon.classList.toggle('hidden');
+                    closeIcon.classList.toggle('hidden');
+                }
+            });
+
+            // Close mobile menu when clicking on a nav link
+            const mobileNavLinks = mobileMenu.querySelectorAll('.nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    
+                    // Reset icons
+                    if (menuIcon && closeIcon) {
+                        menuIcon.classList.remove('hidden');
+                        closeIcon.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    
+                    // Reset icons
+                    if (menuIcon && closeIcon) {
+                        menuIcon.classList.remove('hidden');
+                        closeIcon.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Close mobile menu on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    
+                    // Reset icons
+                    if (menuIcon && closeIcon) {
+                        menuIcon.classList.remove('hidden');
+                        closeIcon.classList.add('hidden');
+                    }
+                    
+                    // Return focus to menu button
+                    mobileMenuButton.focus();
+                }
+            });
+
+            // Close mobile menu on window resize if desktop size is reached
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024) { // lg breakpoint
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    
+                    // Reset icons
+                    if (menuIcon && closeIcon) {
+                        menuIcon.classList.remove('hidden');
+                        closeIcon.classList.add('hidden');
+                    }
+                }
+            });
+        }
+        
+        // Smooth scrolling for all navigation links
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();

@@ -6,7 +6,7 @@ This file represents a placeholder for the GPU 3D model (gpu.glb).
 
 - **Format:** GLB (binary GLTF)
 - **File Size:** < 5MB for web optimization
-- **Geometry:** Tesla P40-style GPU card
+- **Geometry:** Tesla -style GPU card
 - **Features:**
   - Main PCB body
   - Cooling fans (2x)

@@ -1,7 +1,7 @@
 {
     "name": "saimon - AI/ML Labs",
     "short_name": "saimon",
-    "description": "Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster",
+    "description": "Advanced AI/ML research lab powered by NVIDIA Tesla  GPU cluster",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#0a0a0a",

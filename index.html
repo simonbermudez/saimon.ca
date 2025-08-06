@@ -7,8 +7,8 @@
     <!-- Primary Meta Tags -->
     <title>saimon - AI/ML Labs | GPU Cluster & Open Source AI Research</title>
     <meta name="title" content="saimon - AI/ML Labs | GPU Cluster & Open Source AI Research">
-    <meta name="description" content="Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.">
-    <meta name="keywords" content="AI, machine learning, GPU cluster, Tesla P40, open source AI, neural networks, deep learning, LLM, artificial intelligence, research lab, NVIDIA, homelab">
+    <meta name="description" content="Advanced AI/ML research lab powered by NVIDIA Tesla  GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.">
+    <meta name="keywords" content="AI, machine learning, GPU cluster, Tesla , open source AI, neural networks, deep learning, LLM, artificial intelligence, research lab, NVIDIA, homelab">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
     <meta name="author" content="Simon Bermudez">
@@ -20,7 +20,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://saimon.ca">
     <meta property="og:title" content="saimon - AI/ML Labs | GPU Cluster & Open Source AI Research">
-    <meta property="og:description" content="Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.">
+    <meta property="og:description" content="Advanced AI/ML research lab powered by NVIDIA Tesla  GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.">
     <meta property="og:image" content="https://saimon.ca/og-image.jpg">
     <meta property="og:site_name" content="saimon - AI/ML Labs">
     
@@ -28,7 +28,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://saimon.ca">
     <meta property="twitter:title" content="saimon - AI/ML Labs | GPU Cluster & Open Source AI Research">
-    <meta property="twitter:description" content="Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.">
+    <meta property="twitter:description" content="Advanced AI/ML research lab powered by NVIDIA Tesla  GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.">
     <meta property="twitter:image" content="https://saimon.ca/og-image.jpg">
     
     <!-- Favicons -->
@@ -63,7 +63,7 @@
         "alternateName": "saimon",
         "url": "https://saimon.ca",
         "logo": "https://saimon.ca/logo.png",
-        "description": "Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.",
+        "description": "Advanced AI/ML research lab powered by NVIDIA Tesla  GPU cluster. Self-hosted open-source LLMs, deep learning experiments, and cutting-edge neural network development.",
         "foundingDate": "2025",
         "founder": {
             "@type": "Person",
@@ -92,7 +92,7 @@
         "@type": "WebSite",
         "name": "saimon - AI/ML Labs",
         "url": "https://saimon.ca",
-        "description": "Advanced AI/ML research lab powered by NVIDIA Tesla P40 GPU cluster",
+        "description": "Advanced AI/ML research lab powered by NVIDIA Tesla  GPU cluster",
         "publisher": {
             "@type": "Organization",
             "name": "saimon - AI/ML Labs"
@@ -111,7 +111,7 @@
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "Open-Source AI/ML Toolbox - GPU Cluster Implementation",
-        "description": "Comprehensive guide to open-source AI/ML tools running on Tesla P40 GPU cluster",
+        "description": "Comprehensive guide to open-source AI/ML tools running on Tesla  GPU cluster",
         "author": {
             "@type": "Organization",
             "name": "saimon - AI/ML Labs"
@@ -155,12 +155,14 @@
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-40 bg-dark-bg/80 backdrop-blur-md border-b border-gray-700" role="navigation" aria-label="Main navigation">
-        <div class="container mx-auto px-6 py-4">
+        <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex justify-between items-center">
                 <h1 class="text-2xl font-bold text-neon-cyan animate-glow">
                     <a href="#hero" aria-label="saimon - AI/ML Labs Home">saimon</a>
                 </h1>
-                <div class="flex space-x-6 items-center">
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex space-x-6 items-center">
                     <a href="#hero" class="nav-link transition-colors hover:text-neon-cyan" aria-label="Home">Home</a>
                     <a href="#about" class="nav-link transition-colors hover:text-neon-cyan" aria-label="About the Lab">Lab</a>
                     <a href="#trusted-by" class="nav-link transition-colors hover:text-neon-cyan" aria-label="Trusted Partners">Partners</a>
@@ -171,6 +173,32 @@
                        class="ml-4 py-2 px-4 bg-neon-cyan/20 border border-neon-cyan rounded-lg font-medium text-neon-cyan hover:bg-neon-cyan/30 transition-all duration-300 backdrop-blur-sm" 
                        aria-label="Chat with AI - Opens in new window">Chat With Me</a>
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden p-2 text-neon-cyan hover:text-neon-cyan/80 transition-colors duration-300" 
+                        aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="lg:hidden hidden absolute top-full left-0 right-0 bg-dark-bg/95 backdrop-blur-md border-b border-gray-700 shadow-lg">
+                <div class="px-4 py-6 space-y-4">
+                    <a href="#hero" class="block nav-link transition-colors hover:text-neon-cyan py-2" aria-label="Home">Home</a>
+                    <a href="#about" class="block nav-link transition-colors hover:text-neon-cyan py-2" aria-label="About the Lab">Lab</a>
+                    <a href="#trusted-by" class="block nav-link transition-colors hover:text-neon-cyan py-2" aria-label="Trusted Partners">Partners</a>
+                    <a href="#cluster" class="block nav-link transition-colors hover:text-neon-cyan py-2" aria-label="GPU Cluster">Cluster</a>
+                    <a href="#tools" class="block nav-link transition-colors hover:text-neon-cyan py-2" aria-label="Open Source Tools">Tools</a>
+                    <a href="#contact" class="block nav-link transition-colors hover:text-neon-cyan py-2" aria-label="Contact">Contact</a>
+                    <div class="pt-4 border-t border-gray-700">
+                        <a href="https://chat.saimon.ca" target="_blank" rel="noopener noreferrer" 
+                           class="block w-full text-center py-3 px-4 bg-neon-cyan/20 border border-neon-cyan rounded-lg font-medium text-neon-cyan hover:bg-neon-cyan/30 transition-all duration-300 backdrop-blur-sm" 
+                           aria-label="Chat with AI - Opens in new window">Chat With Me</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -178,15 +206,15 @@
     <!-- Hero Section -->
     <header id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
         <canvas id="hero-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
-        <div class="relative z-10 text-center">
-            <h1 class="text-6xl md:text-8xl font-bold mb-6 text-neon-cyan animate-glow">
+        <div class="relative z-10 text-center px-4 sm:px-6">
+            <h1 class="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 text-neon-cyan animate-glow">
                 saimon
             </h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-300">
-                AI/ML Labs - Powered by Tesla P40 GPU Cluster
+            <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
+                AI/ML Labs - Powered by Tesla  GPU Cluster
             </p>
             <a href="https://chat.saimon.ca" target="_blank" rel="noopener noreferrer" 
-               class="inline-block mb-8 py-3 px-8 bg-neon-cyan/20 border border-neon-cyan rounded-lg font-medium text-neon-cyan hover:bg-neon-cyan/30 transition-all duration-300 backdrop-blur-sm text-lg"
+               class="inline-block mb-8 py-3 px-6 sm:px-8 bg-neon-cyan/20 border border-neon-cyan rounded-lg font-medium text-neon-cyan hover:bg-neon-cyan/30 transition-all duration-300 backdrop-blur-sm text-base sm:text-lg"
                aria-label="Start chatting with our AI - Opens in new window">
                 Chat With Me
             </a>
@@ -201,18 +229,18 @@
     <!-- About the Lab -->
     <section id="about" class="relative min-h-screen flex items-center py-20">
         <canvas id="about-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
-        <div class="container mx-auto px-6 relative z-10">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
             <article class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-12 text-neon-cyan">About the Lab</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-6 text-lg text-left">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-neon-cyan">About the Lab</h2>
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <div class="space-y-6 text-base sm:text-lg text-left">
                         <p class="leading-relaxed">
                             Welcome to <strong>saimon</strong>, the AI/ML subsidiary of <a href="https://simonbermudez.com" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:underline">Simon Bermudez Enterprises Inc.</a> 
                             Our mission is to push the boundaries of <em>artificial intelligence</em> and <em>machine learning</em> 
                             through cutting-edge research and experimentation.
                         </p>
                         <p class="leading-relaxed">
-                            Powered by a robust cluster of <strong>NVIDIA Tesla P40 GPUs</strong>, we run self-hosted open-source 
+                            Powered by a robust cluster of <strong>NVIDIA Tesla  GPUs</strong>, we run self-hosted open-source 
                             <abbr title="Large Language Models">large language models</abbr> and conduct advanced AI experiments. Our homelab serves as a 
                             playground for exploring the latest developments in neural networks, deep learning, 
                             and generative AI.
@@ -223,12 +251,12 @@
                         </p>
                     </div>
                     <aside class="text-center">
-                        <div class="inline-block p-8 bg-gray-800/50 rounded-lg backdrop-blur-sm">
-                            <h3 class="text-2xl font-bold text-neon-pink mb-4">Lab Specifications</h3>
-                            <dl class="space-y-2 text-left">
+                        <div class="inline-block p-6 sm:p-8 bg-gray-800/50 rounded-lg backdrop-blur-sm w-full max-w-sm">
+                            <h3 class="text-xl sm:text-2xl font-bold text-neon-pink mb-4">Lab Specifications</h3>
+                            <dl class="space-y-2 text-left text-sm sm:text-base">
                                 <div class="flex justify-between">
                                     <dt>GPU Cards:</dt>
-                                    <dd class="text-neon-cyan font-semibold">Tesla P40 x4</dd>
+                                    <dd class="text-neon-cyan font-semibold">Tesla  x4</dd>
                                 </div>
                                 <div class="flex justify-between">
                                     <dt><abbr title="Video Random Access Memory">VRAM</abbr> Total:</dt>
@@ -252,19 +280,19 @@
 
     <!-- Trusted By Section -->
     <section id="trusted-by" class="relative py-20">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-4 sm:px-6">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-12 text-neon-cyan">Trusted By</h2>
-                <div class="grid md:grid-cols-2 gap-8 items-center">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-neon-cyan">Trusted By</h2>
+                <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 items-center">
                     
                     <!-- Sonity -->
-                    <div class="trusted-partner bg-gray-800/50 rounded-lg p-8 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                    <div class="trusted-partner bg-gray-800/50 rounded-lg p-6 sm:p-8 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-neon-pink/20 rounded-lg flex items-center justify-center mx-auto mb-4">
                                 <span class="text-neon-pink font-bold text-xl">S</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-neon-pink mb-3">Sonity</h3>
-                            <p class="text-gray-300 mb-4">Advanced audio processing and music technology solutions</p>
+                            <h3 class="text-xl sm:text-2xl font-bold text-neon-pink mb-3">Sonity</h3>
+                            <p class="text-gray-300 mb-4 text-sm sm:text-base">Advanced audio processing and music technology solutions</p>
                             <a href="https://sonity.info" target="_blank" rel="noopener noreferrer" 
                                class="text-neon-cyan hover:underline">
                                 sonity.info →
@@ -273,13 +301,13 @@
                     </div>
 
                     <!-- Simon Bermudez Enterprises -->
-                    <div class="trusted-partner bg-gray-800/50 rounded-lg p-8 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                    <div class="trusted-partner bg-gray-800/50 rounded-lg p-6 sm:p-8 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-neon-cyan/20 rounded-lg flex items-center justify-center mx-auto mb-4">
                                 <span class="text-neon-cyan font-bold text-xl">SB</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-neon-cyan mb-3">Simon Bermudez Enterprises</h3>
-                            <p class="text-gray-300 mb-4">Technology consulting and software development services</p>
+                            <h3 class="text-xl sm:text-2xl font-bold text-neon-cyan mb-3">Simon Bermudez Enterprises</h3>
+                            <p class="text-gray-300 mb-4 text-sm sm:text-base">Technology consulting and software development services</p>
                             <a href="https://simonbermudez.com" target="_blank" rel="noopener noreferrer" 
                                class="text-neon-cyan hover:underline">
                                 simonbermudez.com →
@@ -294,15 +322,15 @@
 
     <!-- GPU Cluster Showcase -->
     <section id="cluster" class="relative min-h-screen py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center text-neon-cyan">GPU Cluster</h2>
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-center text-neon-cyan">GPU Cluster</h2>
             <div class="relative">
-                <div id="cluster-carousel" class="flex overflow-x-auto space-x-8 pb-8 snap-x snap-mandatory">
+                <div id="cluster-carousel" class="flex overflow-x-auto space-x-4 sm:space-x-8 pb-8 snap-x snap-mandatory">
                     <!-- GPU Card 1 -->
-                    <div class="flex-none w-80 bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm snap-start">
-                        <div class="gpu-card-3d h-48 mb-6"></div>
-                        <h3 class="text-xl font-bold text-neon-pink mb-4">Tesla P40 #1</h3>
-                        <div class="space-y-2 text-sm">
+                    <div class="flex-none w-72 sm:w-80 bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm snap-start">
+                        <div class="gpu-card-3d h-40 sm:h-48 mb-4 sm:mb-6"></div>
+                        <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-4">Tesla  #1</h3>
+                        <div class="space-y-2 text-xs sm:text-sm">
                             <div class="flex justify-between"><span>Memory:</span> <span class="text-neon-cyan">24GB GDDR5</span></div>
                             <div class="flex justify-between"><span>Bandwidth:</span> <span class="text-neon-cyan">346 GB/s</span></div>
                             <div class="flex justify-between"><span>FP32:</span> <span class="text-neon-cyan">12 TFLOPS</span></div>
@@ -311,10 +339,10 @@
                     </div>
 
                     <!-- GPU Card 2 -->
-                    <div class="flex-none w-80 bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm snap-start">
-                        <div class="gpu-card-3d h-48 mb-6"></div>
-                        <h3 class="text-xl font-bold text-neon-pink mb-4">Tesla P40 #2</h3>
-                        <div class="space-y-2 text-sm">
+                    <div class="flex-none w-72 sm:w-80 bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm snap-start">
+                        <div class="gpu-card-3d h-40 sm:h-48 mb-4 sm:mb-6"></div>
+                        <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-4">Tesla  #2</h3>
+                        <div class="space-y-2 text-xs sm:text-sm">
                             <div class="flex justify-between"><span>Memory:</span> <span class="text-neon-cyan">24GB GDDR5</span></div>
                             <div class="flex justify-between"><span>Bandwidth:</span> <span class="text-neon-cyan">346 GB/s</span></div>
                             <div class="flex justify-between"><span>FP32:</span> <span class="text-neon-cyan">12 TFLOPS</span></div>
@@ -323,10 +351,10 @@
                     </div>
 
                     <!-- GPU Card 3 -->
-                    <div class="flex-none w-80 bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm snap-start">
-                        <div class="gpu-card-3d h-48 mb-6"></div>
-                        <h3 class="text-xl font-bold text-neon-pink mb-4">Tesla P40 #3</h3>
-                        <div class="space-y-2 text-sm">
+                    <div class="flex-none w-72 sm:w-80 bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm snap-start">
+                        <div class="gpu-card-3d h-40 sm:h-48 mb-4 sm:mb-6"></div>
+                        <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-4">Tesla  #3</h3>
+                        <div class="space-y-2 text-xs sm:text-sm">
                             <div class="flex justify-between"><span>Memory:</span> <span class="text-neon-cyan">24GB GDDR5</span></div>
                             <div class="flex justify-between"><span>Bandwidth:</span> <span class="text-neon-cyan">346 GB/s</span></div>
                             <div class="flex justify-between"><span>FP32:</span> <span class="text-neon-cyan">12 TFLOPS</span></div>
@@ -335,10 +363,10 @@
                     </div>
 
                     <!-- GPU Card 4 -->
-                    <div class="flex-none w-80 bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm snap-start">
-                        <div class="gpu-card-3d h-48 mb-6"></div>
-                        <h3 class="text-xl font-bold text-neon-pink mb-4">Tesla P40 #4</h3>
-                        <div class="space-y-2 text-sm">
+                    <div class="flex-none w-72 sm:w-80 bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm snap-start">
+                        <div class="gpu-card-3d h-40 sm:h-48 mb-4 sm:mb-6"></div>
+                        <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-4">Tesla  #4</h3>
+                        <div class="space-y-2 text-xs sm:text-sm">
                             <div class="flex justify-between"><span>Memory:</span> <span class="text-neon-cyan">24GB GDDR5</span></div>
                             <div class="flex justify-between"><span>Bandwidth:</span> <span class="text-neon-cyan">346 GB/s</span></div>
                             <div class="flex justify-between"><span>FP32:</span> <span class="text-neon-cyan">12 TFLOPS</span></div>
@@ -346,28 +374,33 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Mobile scroll hint -->
+                <div class="text-center mt-4 sm:hidden">
+                    <p class="text-neon-cyan/60 text-sm">← Swipe to explore all GPUs →</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Open-Source Toolbox -->
     <section id="tools" class="relative min-h-screen py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center text-neon-cyan">Open-Source Toolbox</h2>
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-center text-neon-cyan">Open-Source Toolbox</h2>
             <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-6">
+                <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
                     
                     <!-- Tool 1: Open Web UI -->
-                    <div class="tool-card bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center">
-                                <span class="text-neon-cyan font-bold">UI</span>
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">UI</span>
                             </div>
-                            <div class="flex-1">
-                                <h3 class="text-xl font-bold text-neon-pink mb-2">Open Web UI</h3>
-                                <p class="text-gray-300 mb-3">User-friendly web interface for ChatGPT-like experiences</p>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">Open Web UI</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">User-friendly web interface for ChatGPT-like experiences</p>
                                 <a href="https://github.com/open-webui/open-webui" target="_blank" rel="noopener noreferrer" 
-                                   class="text-neon-cyan hover:underline text-sm">
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
                                     View on GitHub →
                                 </a>
                             </div>
@@ -375,16 +408,16 @@
                     </div>
 
                     <!-- Tool 2: Whisper -->
-                    <div class="tool-card bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center">
-                                <span class="text-neon-cyan font-bold">🎤</span>
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">🎤</span>
                             </div>
-                            <div class="flex-1">
-                                <h3 class="text-xl font-bold text-neon-pink mb-2">Whisper</h3>
-                                <p class="text-gray-300 mb-3">Robust speech recognition via large-scale weak supervision</p>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">Whisper</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">Robust speech recognition via large-scale weak supervision</p>
                                 <a href="https://github.com/openai/whisper" target="_blank" rel="noopener noreferrer" 
-                                   class="text-neon-cyan hover:underline text-sm">
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
                                     View on GitHub →
                                 </a>
                             </div>
@@ -392,16 +425,16 @@
                     </div>
 
                     <!-- Tool 3: JupyterLab -->
-                    <div class="tool-card bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center">
-                                <span class="text-neon-cyan font-bold">📊</span>
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">📊</span>
                             </div>
-                            <div class="flex-1">
-                                <h3 class="text-xl font-bold text-neon-pink mb-2">JupyterLab</h3>
-                                <p class="text-gray-300 mb-3">Interactive development environment for notebooks and code</p>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">JupyterLab</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">Interactive development environment for notebooks and code</p>
                                 <a href="https://github.com/jupyterlab/jupyterlab" target="_blank" rel="noopener noreferrer" 
-                                   class="text-neon-cyan hover:underline text-sm">
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
                                     View on GitHub →
                                 </a>
                             </div>
@@ -409,16 +442,16 @@
                     </div>
 
                     <!-- Tool 4: n8n -->
-                    <div class="tool-card bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center">
-                                <span class="text-neon-cyan font-bold">⚡</span>
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">⚡</span>
                             </div>
-                            <div class="flex-1">
-                                <h3 class="text-xl font-bold text-neon-pink mb-2">n8n</h3>
-                                <p class="text-gray-300 mb-3">Workflow automation tool for connecting APIs and services</p>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">n8n</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">Workflow automation tool for connecting APIs and services</p>
                                 <a href="https://github.com/n8n-io/n8n" target="_blank" rel="noopener noreferrer" 
-                                   class="text-neon-cyan hover:underline text-sm">
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
                                     View on GitHub →
                                 </a>
                             </div>
@@ -426,16 +459,16 @@
                     </div>
 
                     <!-- Tool 5: LangChain -->
-                    <div class="tool-card bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center">
-                                <span class="text-neon-cyan font-bold">🔗</span>
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">🔗</span>
                             </div>
-                            <div class="flex-1">
-                                <h3 class="text-xl font-bold text-neon-pink mb-2">LangChain</h3>
-                                <p class="text-gray-300 mb-3">Framework for developing applications with language models</p>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">LangChain</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">Framework for developing applications with language models</p>
                                 <a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener noreferrer" 
-                                   class="text-neon-cyan hover:underline text-sm">
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
                                     View on GitHub →
                                 </a>
                             </div>
@@ -443,11 +476,94 @@
                     </div>
 
                     <!-- Tool 6: llama.cpp -->
-                    <div class="tool-card bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center">
-                                <span class="text-neon-cyan font-bold">🦙</span>
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">🦙</span>
                             </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">llama.cpp</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">Port of Facebook's LLaMA model in C/C++</p>
+                                <a href="https://github.com/ggerganov/llama.cpp" target="_blank" rel="noopener noreferrer" 
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
+                                    View on GitHub →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 7: FastChat -->
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">💬</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">FastChat</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">Open platform for training, serving, and evaluating chatbots</p>
+                                <a href="https://github.com/lm-sys/FastChat" target="_blank" rel="noopener noreferrer" 
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
+                                    View on GitHub →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 8: Stable Diffusion WebUI -->
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">🎨</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">Stable Diffusion WebUI</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">Web interface for Stable Diffusion image generation</p>
+                                <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui" target="_blank" rel="noopener noreferrer" 
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
+                                    View on GitHub →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 9: MLflow -->
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">📈</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">MLflow</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">Open source platform for managing ML lifecycle</p>
+                                <a href="https://github.com/mlflow/mlflow" target="_blank" rel="noopener noreferrer" 
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
+                                    View on GitHub →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 10: Trains (AllegroAI) -->
+                    <div class="tool-card bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neon-cyan/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-neon-cyan font-bold text-sm sm:text-base">🚂</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-neon-pink mb-2">Trains (AllegroAI)</h3>
+                                <p class="text-gray-300 mb-3 text-sm sm:text-base">ML experiment manager & version control</p>
+                                <a href="https://github.com/allegroai/trains" target="_blank" rel="noopener noreferrer" 
+                                   class="text-neon-cyan hover:underline text-xs sm:text-sm">
+                                    View on GitHub →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
                             <div class="flex-1">
                                 <h3 class="text-xl font-bold text-neon-pink mb-2">llama.cpp</h3>
                                 <p class="text-gray-300 mb-3">Port of Facebook's LLaMA model in C/C++</p>
@@ -534,9 +650,9 @@
 
     <!-- Contact Section -->
     <section id="contact" class="relative min-h-screen flex items-center py-20">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-4 sm:px-6">
             <div class="max-w-2xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-12 text-neon-cyan">Get In Touch</h2>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-neon-cyan">Get In Touch</h2>
                 
                 <form id="contact-form" class="space-y-6" novalidate>
                     <div class="text-left">
@@ -582,15 +698,15 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800/50 backdrop-blur-sm py-12" role="contentinfo">
-        <div class="container mx-auto px-6 text-center">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
             <address class="not-italic">
-                <p class="text-gray-400 mb-4">
+                <p class="text-gray-400 mb-4 text-sm sm:text-base">
                     © <time datetime="2025">2025</time> <strong>saimon - AI/ML Labs</strong>, a subsidiary of 
                     <a href="https://simonbermudez.com" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:underline">Simon Bermudez Enterprises Inc.</a>
                 </p>
             </address>
             <nav aria-label="Footer navigation">
-                <ul class="flex justify-center space-x-6 text-sm text-gray-400">
+                <ul class="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-gray-400">
                     <li><a href="#about" class="hover:text-neon-cyan transition-colors">About</a></li>
                     <li><a href="#tools" class="hover:text-neon-cyan transition-colors">Tools</a></li>
                     <li><a href="#contact" class="hover:text-neon-cyan transition-colors">Contact</a></li>

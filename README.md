@@ -1,6 +1,6 @@
 # saimon - AI/ML Labs
 
-A visually stunning, fully dark-mode website showcasing Simon Bermudez Enterprises Inc.'s AI/ML Labs subsidiary, featuring a NVIDIA Tesla P40 GPU cluster and open-source AI/ML stack.
+A visually stunning, fully dark-mode website showcasing Simon Bermudez Enterprises Inc.'s AI/ML Labs subsidiary, featuring a NVIDIA Tesla  GPU cluster and open-source AI/ML stack.
 
 ## 🚀 Features
 
@@ -79,7 +79,7 @@ saimon/
 ### 2. About the Lab
 - Mission statement and lab specifications
 - Parallax particle field background
-- Technical details about the Tesla P40 cluster
+- Technical details about the Tesla  cluster
 
 ### 3. GPU Cluster Showcase
 - Horizontally scrollable carousel
@@ -147,8 +147,8 @@ saimon/
 
 ## 📊 GPU Cluster Specifications
 
-Our Tesla P40 cluster features:
-- **4x NVIDIA Tesla P40** GPU cards
+Our Tesla  cluster features:
+- **4x NVIDIA Tesla ** GPU cards
 - **96GB total VRAM** (24GB per card)
 - **15,360 CUDA cores** total
 - **Pascal architecture** with high-precision computing
@@ -180,4 +180,4 @@ MIT License - see LICENSE file for details
 
 ---
 
-Built with ❤️ and powered by Tesla P40 GPUs
+Built with ❤️ and powered by Tesla  GPUs
