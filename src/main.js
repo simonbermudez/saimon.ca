@@ -416,6 +416,7 @@ class SaimonApp {
         const form = document.getElementById('contact-form');
         const successDiv = document.getElementById('form-success');
         const errorDiv = document.getElementById('form-error');
+        const submitButton = form?.querySelector('button[type="submit"]');
 
         if (!form) return;
 
@@ -431,30 +432,92 @@ class SaimonApp {
                 return;
             }
             
+            // Show loading state
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
             // Get form data
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
             try {
-                // Simulate API call (replace with actual endpoint)
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
+                let response;
+                
+                // Option 1: Formspree (recommended)
+                // Sign up at https://formspree.io/ and replace YOUR_FORM_ID
+                if (window.FORMSPREE_ID) {
+                    response = await fetch(`https://formspree.io/f/${window.FORMSPREE_ID}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+                }
+                // Option 2: Netlify Forms (if hosted on Netlify)
+                else if (window.location.hostname.includes('netlify')) {
+                    response = await fetch('/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams({
+                            'form-name': 'contact',
+                            ...data
+                        })
+                    });
+                }
+                // Option 3: EmailJS (client-side email service)
+                else if (window.emailjs && window.EMAILJS_CONFIG) {
+                    const result = await window.emailjs.send(
+                        window.EMAILJS_CONFIG.serviceID,
+                        window.EMAILJS_CONFIG.templateID,
+                        {
+                            from_name: data.name,
+                            from_email: data.email,
+                            message: data.message
+                        },
+                        window.EMAILJS_CONFIG.publicKey
+                    );
+                    response = { ok: true };
+                }
+                // Fallback: Show instructions for manual setup
+                else {
+                    throw new Error('No email service configured');
+                }
 
                 if (response.ok) {
                     successDiv.classList.remove('hidden');
                     form.reset();
+                    // Scroll to success message
+                    successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     throw new Error('Network response was not ok');
                 }
                 
             } catch (error) {
                 console.error('Form submission error:', error);
+                
+                let errorMessage = 'There was an error sending your message. ';
+                
+                if (error.message === 'No email service configured') {
+                    errorMessage += 'Please contact us directly at your-email@saimon.ca or set up a form service.';
+                } else {
+                    errorMessage += 'Please try again or contact us directly.';
+                }
+                
+                errorDiv.innerHTML = `
+                    <p>${errorMessage}</p>
+                    <p class="mt-2 text-sm">Alternative: Email us directly at <a href="mailto:contact@saimon.ca" class="text-neon-cyan hover:underline">contact@saimon.ca</a></p>
+                `;
                 errorDiv.classList.remove('hidden');
+                // Scroll to error message
+                errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } finally {
+                // Reset button state
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
             }
         });
     }
