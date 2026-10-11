@@ -1,415 +1,186 @@
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-
-// Main application class
+// Main application: page UI + the WebGL Tesla stage
 class SaimonApp {
     constructor() {
-        this.scenes = {};
-        this.renderers = {};
-        this.cameras = {};
-        this.frameId = null;
+        this.stage = null;
         this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
-        this.init();
-    }
+        document.documentElement.classList.add('js');
 
-    async init() {
-        // Wait for DOM to load
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.setup());
         } else {
-            await this.setup();
+            this.setup();
         }
     }
 
     async setup() {
+        this.initializeNavigation();
+        this.initializeScrollEffects();
+        this.initializeCounters();
+        this.initializeToolSpotlight();
+        this.initializeContactForm();
+        this.initializeClusterCarousel();
+
+        // Never keep the boot screen up longer than this
+        setTimeout(() => this.hideLoadingScreen(), 4000);
         try {
-            // Initialize all components
-            await this.initializeScenes();
-            this.initializeNavigation();
-            this.initializeScrollEffects();
-            this.initializeContactForm();
-            this.initializeClusterCarousel();
-            
-            // Start render loop
-            this.animate();
-            
-            // Hide loading screen
-            this.hideLoadingScreen();
-            
+            await this.initializeStage();
         } catch (error) {
-            console.error('Failed to initialize application:', error);
+            console.error('WebGL stage unavailable:', error);
+            document.documentElement.classList.add('no-webgl');
+            document.body.classList.add('no-webgl');
             this.hideLoadingScreen();
         }
     }
 
-    async initializeScenes() {
-        // Initialize hero scene
-        await this.createHeroScene();
-        
-        // Initialize about scene
-        await this.createAboutScene();
-        
-        // Initialize cluster GPU cards
-        this.createClusterCards();
-        
-        // Handle window resize
-        window.addEventListener('resize', () => this.handleResize());
-    }
+    async initializeStage() {
+        const canvas = document.getElementById('gl');
+        if (!canvas) throw new Error('Missing #gl canvas');
 
-    async createHeroScene() {
-        const canvas = document.getElementById('hero-canvas');
-        if (!canvas) return;
-
-        // Create scene, camera, renderer
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ 
-            canvas, 
-            antialias: true, 
-            alpha: true,
-            powerPreference: 'high-performance'
-        });
-        
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setClearColor(0x000000, 0);
-
-        // Store references
-        this.scenes.hero = scene;
-        this.cameras.hero = camera;
-        this.renderers.hero = renderer;
-
-        // Create GPU geometry (simplified representation)
-        const gpuGeometry = new THREE.BoxGeometry(4, 0.8, 6);
-        
-        // Create wireframe material with neon glow effect
-        const gpuMaterial = new THREE.MeshStandardMaterial({
-            color: 0x00ffd1,
-            wireframe: true,
-            emissive: 0x00ffd1,
-            emissiveIntensity: 0.3,
-            transparent: true,
-            opacity: 0.8
-        });
-
-        // Create GPU mesh
-        const gpu = new THREE.Mesh(gpuGeometry, gpuMaterial);
-        scene.add(gpu);
-
-        // Add cooling fans (simple cylinders)
-        const fanGeometry = new THREE.CylinderGeometry(0.6, 0.6, 0.1, 8);
-        const fanMaterial = new THREE.MeshStandardMaterial({
-            color: 0x00ffd1,
-            wireframe: true,
-            emissive: 0x00ffd1,
-            emissiveIntensity: 0.2,
-            transparent: true,
-            opacity: 0.7
-        });
-
-        const fan1 = new THREE.Mesh(fanGeometry, fanMaterial);
-        fan1.position.set(-1.2, 0.5, 1);
-        fan1.rotation.x = Math.PI / 2;
-        scene.add(fan1);
-
-        const fan2 = new THREE.Mesh(fanGeometry, fanMaterial);
-        fan2.position.set(1.2, 0.5, 1);
-        fan2.rotation.x = Math.PI / 2;
-        scene.add(fan2);
-
-        // Store fan references for animation
-        this.heroFans = [fan1, fan2];
-        this.heroGPU = gpu;
-
-        // Add lighting
-        const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
-        scene.add(ambientLight);
-
-        const pointLight = new THREE.PointLight(0x00ffd1, 1, 100);
-        pointLight.position.set(0, 5, 5);
-        scene.add(pointLight);
-
-        const pointLight2 = new THREE.PointLight(0xff4d97, 0.5, 100);
-        pointLight2.position.set(-5, -2, 3);
-        scene.add(pointLight2);
-
-        // Position camera
-        camera.position.set(0, 2, 8);
-        camera.lookAt(0, 0, 0);
-
-        // Add particles for ambiance
-        this.createParticles(scene, 'hero');
-    }
-
-    async createAboutScene() {
-        const canvas = document.getElementById('about-canvas');
-        if (!canvas) return;
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ 
-            canvas, 
-            antialias: true, 
-            alpha: true,
-            powerPreference: 'high-performance'
-        });
-        
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setClearColor(0x000000, 0);
-
-        this.scenes.about = scene;
-        this.cameras.about = camera;
-        this.renderers.about = renderer;
-
-        // Create parallax particle field
-        this.createParticles(scene, 'about');
-
-        // Add subtle lighting
-        const ambientLight = new THREE.AmbientLight(0x404040, 0.3);
-        scene.add(ambientLight);
-
-        camera.position.z = 5;
-    }
-
-    createParticles(scene, sceneType) {
-        const particleCount = this.isReducedMotion ? 50 : 200;
-        const geometry = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        const velocities = new Float32Array(particleCount * 3);
-
-        for (let i = 0; i < particleCount * 3; i += 3) {
-            positions[i] = (Math.random() - 0.5) * 50;     // x
-            positions[i + 1] = (Math.random() - 0.5) * 50; // y
-            positions[i + 2] = (Math.random() - 0.5) * 50; // z
-            
-            velocities[i] = (Math.random() - 0.5) * 0.02;     // vx
-            velocities[i + 1] = (Math.random() - 0.5) * 0.02; // vy
-            velocities[i + 2] = (Math.random() - 0.5) * 0.02; // vz
+        // Wordmark textures are drawn with the web fonts, so wait (briefly) for them
+        if (document.fonts?.ready) {
+            await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1500))]);
         }
 
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-        const material = new THREE.PointsMaterial({
-            color: sceneType === 'hero' ? 0x00ffd1 : 0x484f58,
-            size: sceneType === 'hero' ? 0.1 : 0.05,
-            transparent: true,
-            opacity: 0.6,
-            blending: THREE.AdditiveBlending
+        const { GpuStage } = await import('./gpu/stage.js');
+        this.stage = new GpuStage(canvas, {
+            reducedMotion: this.isReducedMotion,
+            callouts: [...document.querySelectorAll('.callout')],
+            clusterSticky: document.querySelector('.cluster-sticky'),
         });
+        this.stage.onFirstFrame = () => setTimeout(() => this.hideLoadingScreen(), 350);
+        this.stage.start();
 
-        const particles = new THREE.Points(geometry, material);
-        scene.add(particles);
-
-        // Store particle data for animation
-        particles.userData = { velocities, sceneType };
-        
-        if (sceneType === 'hero') {
-            this.heroParticles = particles;
-        } else {
-            this.aboutParticles = particles;
-        }
-    }
-
-    createClusterCards() {
-        const clusterCards = document.querySelectorAll('.gpu-card-3d');
-        
-        clusterCards.forEach((card, index) => {
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(50, card.clientWidth / card.clientHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ 
-                antialias: true, 
-                alpha: true,
-                powerPreference: 'low-power'
-            });
-            
-            renderer.setSize(card.clientWidth, card.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.setClearColor(0x000000, 0);
-            
-            // Create mini GPU card
-            const geometry = new THREE.BoxGeometry(2, 0.4, 3);
-            const material = new THREE.MeshStandardMaterial({
-                color: 0xff4d97,
-                wireframe: true,
-                emissive: 0xff4d97,
-                emissiveIntensity: 0.4,
-                transparent: true,
-                opacity: 0.9
-            });
-            
-            const gpu = new THREE.Mesh(geometry, material);
-            scene.add(gpu);
-            
-            // Add lighting optimized for wireframes
-            const ambientLight = new THREE.AmbientLight(0x404040, 0.8);
-            scene.add(ambientLight);
-            
-            const pointLight = new THREE.PointLight(0xff4d97, 1.2, 50);
-            pointLight.position.set(2, 2, 2);
-            scene.add(pointLight);
-
-            const rimLight = new THREE.PointLight(0x00ffd1, 0.8, 30);
-            rimLight.position.set(-2, -1, 3);
-            scene.add(rimLight);
-            
-            camera.position.set(0, 1, 4);
-            camera.lookAt(0, 0, 0);
-            
-            // Append canvas to card
-            card.appendChild(renderer.domElement);
-            
-            // Store reference
-            this.scenes[`cluster-${index}`] = { scene, camera, renderer, gpu };
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) this.stage.stop();
+            else this.stage.start();
         });
     }
 
     initializeNavigation() {
-        const navLinks = document.querySelectorAll('.nav-link');
+        const nav = document.getElementById('site-nav');
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
         const closeIcon = document.getElementById('close-icon');
-        
-        // Mobile menu toggle functionality
+
+        const setMenu = (open) => {
+            mobileMenu.classList.toggle('hidden', !open);
+            mobileMenuButton.setAttribute('aria-expanded', String(open));
+            menuIcon?.classList.toggle('hidden', open);
+            closeIcon?.classList.toggle('hidden', !open);
+            nav.classList.toggle('is-scrolled', open || window.scrollY > 24);
+        };
+
         if (mobileMenuButton && mobileMenu) {
             mobileMenuButton.addEventListener('click', () => {
-                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-                
-                // Toggle menu visibility
-                mobileMenu.classList.toggle('hidden');
-                
-                // Update button state
-                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                
-                // Toggle icons
-                if (menuIcon && closeIcon) {
-                    menuIcon.classList.toggle('hidden');
-                    closeIcon.classList.toggle('hidden');
-                }
+                setMenu(mobileMenuButton.getAttribute('aria-expanded') !== 'true');
             });
-
-            // Close mobile menu when clicking on a nav link
-            const mobileNavLinks = mobileMenu.querySelectorAll('.nav-link');
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuButton.setAttribute('aria-expanded', 'false');
-                    
-                    // Reset icons
-                    if (menuIcon && closeIcon) {
-                        menuIcon.classList.remove('hidden');
-                        closeIcon.classList.add('hidden');
-                    }
-                });
+            mobileMenu.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => setMenu(false));
             });
-
-            // Close mobile menu when clicking outside
             document.addEventListener('click', (e) => {
-                if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuButton.setAttribute('aria-expanded', 'false');
-                    
-                    // Reset icons
-                    if (menuIcon && closeIcon) {
-                        menuIcon.classList.remove('hidden');
-                        closeIcon.classList.add('hidden');
-                    }
-                }
+                if (!nav.contains(e.target)) setMenu(false);
             });
-
-            // Close mobile menu on escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuButton.setAttribute('aria-expanded', 'false');
-                    
-                    // Reset icons
-                    if (menuIcon && closeIcon) {
-                        menuIcon.classList.remove('hidden');
-                        closeIcon.classList.add('hidden');
-                    }
-                    
-                    // Return focus to menu button
+                    setMenu(false);
                     mobileMenuButton.focus();
                 }
             });
-
-            // Close mobile menu on window resize if desktop size is reached
             window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1024) { // lg breakpoint
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuButton.setAttribute('aria-expanded', 'false');
-                    
-                    // Reset icons
-                    if (menuIcon && closeIcon) {
-                        menuIcon.classList.remove('hidden');
-                        closeIcon.classList.add('hidden');
-                    }
-                }
+                if (window.innerWidth >= 1024) setMenu(false);
             });
         }
-        
-        // Smooth scrolling for all navigation links
-        navLinks.forEach(link => {
+
+        // Smooth scrolling for in-page links (scroll-margin handles the nav offset)
+        document.querySelectorAll('a.nav-link[href^="#"]').forEach((link) => {
             link.addEventListener('click', (e) => {
+                const target = document.querySelector(link.getAttribute('href'));
+                if (!target) return;
                 e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const target = document.querySelector(targetId);
-                
-                if (target) {
-                    const offsetTop = target.offsetTop - 80; // Account for nav height
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
+                target.scrollIntoView({ behavior: this.isReducedMotion ? 'auto' : 'smooth' });
+                history.replaceState(null, '', link.getAttribute('href'));
             });
         });
 
-        // Update active nav link on scroll
-        window.addEventListener('scroll', this.throttle(() => {
-            const sections = document.querySelectorAll('section');
-            const scrollPos = window.scrollY + 100;
-            
-            sections.forEach(section => {
-                const top = section.offsetTop;
-                const height = section.offsetHeight;
-                
-                if (scrollPos >= top && scrollPos < top + height) {
-                    navLinks.forEach(link => link.classList.remove('text-neon-cyan'));
-                    const activeLink = document.querySelector(`a[href="#${section.id}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('text-neon-cyan');
-                    }
-                }
+        // Frosted nav once scrolled
+        const onScroll = () => {
+            if (mobileMenu?.classList.contains('hidden')) {
+                nav.classList.toggle('is-scrolled', window.scrollY > 24);
+            }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        // Active section highlight
+        const links = [...document.querySelectorAll('.nav-links .nav-link')];
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                links.forEach((l) => l.classList.toggle('is-active', l.getAttribute('href') === `#${entry.target.id}`));
             });
-        }, 100));
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        document.querySelectorAll('main > header, main > section').forEach((s) => observer.observe(s));
     }
 
     initializeScrollEffects() {
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -10% 0px'
+        const items = document.querySelectorAll('.reveal');
+        if (this.isReducedMotion || !('IntersectionObserver' in window)) {
+            items.forEach((el) => el.classList.add('is-visible'));
+            return;
+        }
+
+        // Stagger siblings that enter together
+        const observer = new IntersectionObserver((entries) => {
+            const entering = entries.filter((e) => e.isIntersecting);
+            entering.forEach((entry, i) => {
+                entry.target.style.setProperty('--delay', `${Math.min(i, 8) * 70}ms`);
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+        items.forEach((el) => observer.observe(el));
+    }
+
+    initializeCounters() {
+        const counters = document.querySelectorAll('[data-count]');
+        if (this.isReducedMotion) return;
+
+        const run = (el) => {
+            const end = parseFloat(el.dataset.count);
+            const decimals = parseInt(el.dataset.decimals || '0', 10);
+            const fmt = new Intl.NumberFormat('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+            const start = performance.now();
+            const duration = 1800;
+            const step = (now) => {
+                const t = Math.min(1, (now - start) / duration);
+                const eased = 1 - Math.pow(1 - t, 4);
+                el.textContent = fmt.format(end * eased);
+                if (t < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
+                    setTimeout(() => run(entry.target), 600);
+                    observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        });
+        counters.forEach((el) => observer.observe(el));
+    }
 
-        // Observe sections for animations
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => observer.observe(section));
-
-        // Observe tool cards
-        const toolCards = document.querySelectorAll('.tool-card');
-        toolCards.forEach(card => observer.observe(card));
+    initializeToolSpotlight() {
+        document.querySelectorAll('.tool-card').forEach((card) => {
+            card.addEventListener('pointermove', (e) => {
+                const r = card.getBoundingClientRect();
+                card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+                card.style.setProperty('--my', `${e.clientY - r.top}px`);
+            });
+        });
     }
 
     initializeContactForm() {
@@ -422,30 +193,29 @@ class SaimonApp {
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             // Clear previous messages
             successDiv.classList.add('hidden');
             errorDiv.classList.add('hidden');
-            
+
             // Validate form
             if (!this.validateForm(form)) {
                 return;
             }
-            
+
             // Show loading state
             const originalButtonText = submitButton.textContent;
             submitButton.textContent = 'Sending...';
             submitButton.disabled = true;
-            
+
             // Get form data
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
-            
+
             try {
                 let response;
-                
+
                 // Option 1: Formspree (recommended)
-                // Sign up at https://formspree.io/ and replace YOUR_FORM_ID
                 if (window.FORMSPREE_ID) {
                     response = await fetch(`https://formspree.io/f/${window.FORMSPREE_ID}`, {
                         method: 'POST',
@@ -470,7 +240,7 @@ class SaimonApp {
                 }
                 // Option 3: EmailJS (client-side email service)
                 else if (window.emailjs && window.EMAILJS_CONFIG) {
-                    const result = await window.emailjs.send(
+                    await window.emailjs.send(
                         window.EMAILJS_CONFIG.serviceID,
                         window.EMAILJS_CONFIG.templateID,
                         {
@@ -490,32 +260,29 @@ class SaimonApp {
                 if (response.ok) {
                     successDiv.classList.remove('hidden');
                     form.reset();
-                    // Scroll to success message
                     successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     throw new Error('Network response was not ok');
                 }
-                
+
             } catch (error) {
                 console.error('Form submission error:', error);
-                
+
                 let errorMessage = 'There was an error sending your message. ';
-                
+
                 if (error.message === 'No email service configured') {
                     errorMessage += 'Please contact us directly at your-email@saimon.ca or set up a form service.';
                 } else {
                     errorMessage += 'Please try again or contact us directly.';
                 }
-                
+
                 errorDiv.innerHTML = `
                     <p>${errorMessage}</p>
-                    <p class="mt-2 text-sm">Alternative: Email us directly at <a href="mailto:contact@saimon.ca" class="text-neon-cyan hover:underline">contact@saimon.ca</a></p>
+                    <p class="mt-2 text-sm">Alternative: Email us directly at <a href="mailto:contact@saimon.ca">contact@saimon.ca</a></p>
                 `;
                 errorDiv.classList.remove('hidden');
-                // Scroll to error message
                 errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } finally {
-                // Reset button state
                 submitButton.textContent = originalButtonText;
                 submitButton.disabled = false;
             }
@@ -553,10 +320,10 @@ class SaimonApp {
             if (errorMessage) {
                 errorDiv.textContent = errorMessage;
                 errorDiv.classList.remove('hidden');
-                input.classList.add('border-red-400');
+                input.classList.add('is-invalid');
             } else {
                 errorDiv.classList.add('hidden');
-                input.classList.remove('border-red-400');
+                input.classList.remove('is-invalid');
             }
         });
 
@@ -567,203 +334,31 @@ class SaimonApp {
         const carousel = document.getElementById('cluster-carousel');
         if (!carousel) return;
 
-        // Add touch/mouse drag scrolling
+        // Mouse drag scrolling for the horizontal node strip (small screens)
         let isDown = false;
         let startX;
         let scrollLeft;
 
         carousel.addEventListener('mousedown', (e) => {
             isDown = true;
-            carousel.style.cursor = 'grabbing';
             startX = e.pageX - carousel.offsetLeft;
             scrollLeft = carousel.scrollLeft;
         });
-
-        carousel.addEventListener('mouseleave', () => {
-            isDown = false;
-            carousel.style.cursor = 'grab';
-        });
-
-        carousel.addEventListener('mouseup', () => {
-            isDown = false;
-            carousel.style.cursor = 'grab';
-        });
-
+        ['mouseleave', 'mouseup'].forEach((evt) => carousel.addEventListener(evt, () => { isDown = false; }));
         carousel.addEventListener('mousemove', (e) => {
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - carousel.offsetLeft;
-            const walk = (x - startX) * 2;
-            carousel.scrollLeft = scrollLeft - walk;
-        });
-    }
-
-    animate() {
-        this.frameId = requestAnimationFrame(() => this.animate());
-
-        const time = Date.now() * 0.001;
-
-        // Animate hero scene
-        if (this.heroGPU && !this.isReducedMotion) {
-            this.heroGPU.rotation.y = Math.sin(time * 0.5) * 0.3;
-            this.heroGPU.rotation.x = Math.sin(time * 0.3) * 0.1;
-            
-            // Pulse wireframe intensity
-            const pulseFactor = (Math.sin(time * 2) + 1) * 0.5;
-            this.heroGPU.material.emissiveIntensity = 0.3 + pulseFactor * 0.2;
-        }
-
-        if (this.heroFans && !this.isReducedMotion) {
-            this.heroFans.forEach((fan, index) => {
-                fan.rotation.z += 0.1;
-                // Pulse wireframe intensity for fans too
-                const pulseFactor = (Math.sin(time * 2 + index * 0.5) + 1) * 0.5;
-                fan.material.emissiveIntensity = 0.2 + pulseFactor * 0.15;
-            });
-        }
-
-        // Animate particles
-        this.animateParticles(this.heroParticles, time);
-        this.animateParticles(this.aboutParticles, time);
-
-        // Animate cluster cards
-        Object.keys(this.scenes).forEach((key, index) => {
-            if (key.startsWith('cluster-')) {
-                const sceneData = this.scenes[key];
-                if (sceneData.gpu && !this.isReducedMotion) {
-                    sceneData.gpu.rotation.y += 0.01;
-                    
-                    // Add pulsing wireframe effect
-                    const pulseFactor = (Math.sin(time * 1.5 + index * 0.7) + 1) * 0.5;
-                    sceneData.gpu.material.emissiveIntensity = 0.4 + pulseFactor * 0.3;
-                }
-                sceneData.renderer.render(sceneData.scene, sceneData.camera);
-            }
-        });
-
-        // Render main scenes
-        if (this.scenes.hero && this.cameras.hero && this.renderers.hero) {
-            this.renderers.hero.render(this.scenes.hero, this.cameras.hero);
-        }
-
-        if (this.scenes.about && this.cameras.about && this.renderers.about) {
-            this.renderers.about.render(this.scenes.about, this.cameras.about);
-        }
-    }
-
-    animateParticles(particles, time) {
-        if (!particles || this.isReducedMotion) return;
-
-        const positions = particles.geometry.attributes.position.array;
-        const velocities = particles.userData.velocities;
-
-        for (let i = 0; i < positions.length; i += 3) {
-            positions[i] += velocities[i];
-            positions[i + 1] += velocities[i + 1];
-            positions[i + 2] += velocities[i + 2];
-
-            // Wrap particles around
-            if (Math.abs(positions[i]) > 25) positions[i] *= -1;
-            if (Math.abs(positions[i + 1]) > 25) positions[i + 1] *= -1;
-            if (Math.abs(positions[i + 2]) > 25) positions[i + 2] *= -1;
-        }
-
-        particles.geometry.attributes.position.needsUpdate = true;
-        particles.rotation.y += 0.001;
-    }
-
-    handleResize() {
-        Object.keys(this.cameras).forEach(key => {
-            const camera = this.cameras[key];
-            const renderer = this.renderers[key];
-            const canvas = renderer.domElement;
-
-            if (canvas.parentElement) {
-                const width = canvas.parentElement.clientWidth;
-                const height = canvas.parentElement.clientHeight;
-
-                camera.aspect = width / height;
-                camera.updateProjectionMatrix();
-                renderer.setSize(width, height);
-            }
-        });
-
-        // Resize cluster cards
-        Object.keys(this.scenes).forEach(key => {
-            if (key.startsWith('cluster-')) {
-                const sceneData = this.scenes[key];
-                const canvas = sceneData.renderer.domElement;
-                const container = canvas.parentElement;
-                
-                if (container) {
-                    sceneData.camera.aspect = container.clientWidth / container.clientHeight;
-                    sceneData.camera.updateProjectionMatrix();
-                    sceneData.renderer.setSize(container.clientWidth, container.clientHeight);
-                }
-            }
+            carousel.scrollLeft = scrollLeft - (x - startX) * 2;
         });
     }
 
     hideLoadingScreen() {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            loadingScreen.style.opacity = '0';
-            loadingScreen.style.transition = 'opacity 0.5s ease-out';
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        }
-    }
-
-    throttle(func, limit) {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        }
-    }
-
-    // Cleanup method
-    destroy() {
-        if (this.frameId) {
-            cancelAnimationFrame(this.frameId);
-        }
-
-        // Dispose of all Three.js resources
-        Object.keys(this.scenes).forEach(key => {
-            const scene = this.scenes[key];
-            if (scene.dispose) {
-                scene.dispose();
-            }
-        });
-
-        Object.keys(this.renderers).forEach(key => {
-            const renderer = this.renderers[key];
-            if (renderer.dispose) {
-                renderer.dispose();
-            }
-        });
+        document.getElementById('loading-screen')?.classList.add('is-done');
     }
 }
 
-// Initialize the application
 const app = new SaimonApp();
 
-// Handle page visibility change to pause/resume animations
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        if (app.frameId) {
-            cancelAnimationFrame(app.frameId);
-        }
-    } else {
-        app.animate();
-    }
-});
-
-// Export for potential external use
 export default SaimonApp;
+export { app };

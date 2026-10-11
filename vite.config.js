@@ -4,7 +4,9 @@ export default defineConfig({
   root: '.',
   build: {
     outDir: 'dist',
-    assetsDir: 'assets'
+    assetsDir: 'assets',
+    // three.js + postprocessing is a single lazily loaded chunk
+    chunkSizeWarningLimit: 700
   },
   server: {
     port: 3000,
