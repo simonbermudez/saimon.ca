@@ -1,0 +1,31 @@
+# Dokploy deployment
+# - Set "Compose Path" to ./compose.dokploy.yml in the Dokploy service settings.
+# - Add the domain in the Dokploy "Domains" tab (service: saimon-app, port: 80);
+#   Dokploy generates the Traefik routing and HTTPS certificates for you.
+# - No host ports are published: Traefik reaches the container over dokploy-network.
+
+services:
+  saimon-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+    restart: unless-stopped
+    networks:
+      - dokploy-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  dokploy-network:
+    external: true
